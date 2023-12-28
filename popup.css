@@ -1,0 +1,86 @@
+/* body {font-family: 'Caveat', cursive;} */
+body {font-family: 'Cute Font', sans-serif;
+font-size: 20px;}
+p {display: inline;}
+
+html { 
+  width : 340px;
+  height : 540px;
+}
+
+
+/*BG*/
+
+div#pick img#bg_1 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+div#calendar img#bg_2 {
+  position: absolute;
+  margin-top: -410px;
+  margin-left: -64px;
+  transform: scale(.8);
+  z-index: -2;
+  pointer-events: none;
+} 
+  
+div#calendar {
+  display: none;
+}
+  
+
+div#tail p {
+  position: absolute;
+  margin-top: 23px;
+  margin-left: 6px;
+  font-size: 10px;
+  z-index: 100;
+} 
+
+.custom-input {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  background-color: #eda9ed;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  transition: background-color 0.3s ease-in-out;
+  width: 200px; /* Adjust width as needed */
+}
+
+/* On focus, change the background color */
+.custom-input:focus {
+  background-color: #ea75ea;
+  outline: none; /* Remove default focus outline */
+}
+
+#saveButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(210, 66, 169);
+  color: white;
+  font-family: 'Arial', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* On hover, change the background color */
+#saveButton:hover {
+  background-color: rgb(238, 115, 203);
+}
+
+div#bg img#bg_1 {
+  position: absolute;
+  margin-top: -410px;
+  margin-left: -64px;
+  transform: scale(.8);
+  z-index: -2;
+  pointer-events: none;
+}

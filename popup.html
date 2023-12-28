@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   
+  <link href="popup.css" rel="stylesheet" type="text/css"> 
+  <script src="./jquery-3.7.1.min.js"></script> 
+  <script src="./popup.js"></script>
+
+</head>
+
+<body>
+  <div id="pick">
+    <div id="happy-prompt">
+      <p>Today, what made you</p>
+      <p style="font-family: 'Courgette';">happy?</p>
+      <input class="custom-input" id="happyInput" placeholder="Enter your happy moment">
+    </div>
+    <div id="inspiration-prompt">
+      <p>What is today's</p>
+      <p style="font-family: 'Courgette';">quote?</p>
+      <input class="custom-input" id="quoteInput" placeholder="Enter your quote of the day">
+
+    </div>
+    <div id="photo-prompt">
+      <p>What is today's</p>
+      <p style="font-family: 'Courgette';">photo memory?</p>
+      <input class="custom-input" id="photoInput" type="file">
+    </div>
+    <button id="saveButton">Save Today's Memory</button>
+    <div id="bg">
+      <img id="bg_1" src="art/bg_1.png"></img>
+    </div>
+  </div>
+
+  <div id="calendar">
+    <img id="bg_2" src="art/bg_2.png">
+    </img>
+    <button id="editButton">Edit Today's Memory</button>
+
+
+  </div>
+</body>
+
+</html>
