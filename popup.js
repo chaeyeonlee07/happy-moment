@@ -8,8 +8,10 @@ $(document).ready(function() {
         goToRandomQuote();
         const [happyMoment, quoteOfTheDay, imgData] = result[today];
         generateEntries(happyMoment, quoteOfTheDay, imgData);
+        updateDate();
       } else {
-        goToPick();
+        $('#calendar').fadeIn(0);
+        updateDate();
       }
     });
   }
@@ -18,10 +20,12 @@ $(document).ready(function() {
   $("#saveButton").on("click", function() {
     goToRandomQuote();
     saveData();
+    updateDate();
   });
 
   $("#editButton").on("click", function() {
     goToPick();
+    updateDate();
   });
 
   function goToPick() {
@@ -48,26 +52,48 @@ $(document).ready(function() {
     $('#favorite_quote').text(quoteOfTheDay);
     $('#favorite_image').attr('src', imgData); 
   }
+  function getCurrentDate() {
+    const today = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    return today.toLocaleDateString(undefined, options);
+  }
+  
+  // Update the HTML with the current date
+  function updateDate() {
+    const dateElement = document.getElementById('dateDisplay');
+    const currentDate = getCurrentDate();
+    dateElement.textContent = `${currentDate}`;
+    const dateElement2 = document.getElementById('dateDisplay2');
+    dateElement2.textContent = `${currentDate}`;
+  }
 
   function getBase64Image(file, callback) {
-    const reader = new FileReader();
-    reader.onload = function(event) {
-      callback(event.target.result);
-    };
-    reader.readAsDataURL(file);
+    if (file instanceof Blob) {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        callback(event.target.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      // Handle the case where the input is not a Blob
+      console.error('Invalid file format or no file selected.');
+      callback(null);
+    }
   }
 
   function saveData() {
     const happyMoment = $('#happyInput').val();
     const quoteOfTheDay = $('#quoteInput').val();
     const bannerImage = document.getElementById('photoInput').files[0];
-
-    getBase64Image(bannerImage, function(imgData) {
-      const today = generateDate();
-      const dataToSave = [happyMoment, quoteOfTheDay, imgData];
-      chrome.storage.local.set({ [today]: dataToSave }, function() {
-        generateEntries(happyMoment, quoteOfTheDay, imgData);
+  
+    if (bannerImage && bannerImage instanceof File) {
+      getBase64Image(bannerImage, function(imgData) {
+        const today = generateDate();
+        const dataToSave = [happyMoment, quoteOfTheDay, imgData];
+        chrome.storage.local.set({ [today]: dataToSave }, function() {
+          generateEntries(happyMoment, quoteOfTheDay, imgData);
+        });
       });
-    });
+    }
   }
 });

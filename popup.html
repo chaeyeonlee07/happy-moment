@@ -2,47 +2,60 @@
 <html>
 
 <head>
-   
-  <link href="popup.css" rel="stylesheet" type="text/css"> 
-  <script src="./jquery-3.7.1.min.js"></script> 
+
+  <link href="popup.css" rel="stylesheet" type="text/css">
+  <script src="./jquery-3.7.1.min.js"></script>
   <script src="./popup.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Courgette&family=Cute+Font&family=PT+Serif&family=Parisienne&family=Roboto+Slab:wght@300&family=Single+Day&display=swap"
+    rel="stylesheet">
 
 </head>
 
 <body>
   <div id="pick">
-    <div id="happy-prompt">
-      <p>Today, what made you</p>
-      <p style="font-family: 'Courgette';">happy?</p>
-      <input class="custom-input" id="happyInput" placeholder="Enter your happy moment">
-    </div>
-    <div id="inspiration-prompt">
-      <p>What is today's</p>
-      <p style="font-family: 'Courgette';">quote?</p>
-      <input class="custom-input" id="quoteInput" placeholder="Enter your quote of the day">
+    <div id="all-prompts">
+      <div id="happy-prompt">
+        <p>What made you happy today?</p>
+        <input class="custom-input" id="happyInput" placeholder="Enter your happy moment" maxlength="80">
+      </div>
+      <div id="inspiration-prompt">
+        <p>What is today's quote?</p>
+        <input class="custom-input" id="quoteInput" placeholder="Enter your quote of the day" maxlength="80">
 
+      </div>
+      <div id="photo-prompt">
+        <p>What is today's photo memory?</p>
+        <input class="custom-input" id="photoInput" type="file">
+      </div>
+      <button id="saveButton">Save Today's Memory</button>
     </div>
-    <div id="photo-prompt">
-      <p>What is today's</p>
-      <p style="font-family: 'Courgette';">photo memory?</p>
-      <input class="custom-input" id="photoInput" type="file">
-    </div>
-    <button id="saveButton">Save Today's Memory</button>
+    <p id="dateDisplay"></p>
     <img id="bg_1" src="art/bg_1.png"></img>
   </div>
 
   <div id="calendar">
-    <img id="bg_2" src="art/bg_2.jpg">
-    <img id="favorite_image">
-    <div class="info-box">
-      <div class="happiness-box">
-        <p id="my_happiness"></p>
-      </div>
-      <div class="quote-box">
-        <p id="favorite_quote"></p>
+    <div id="calendar-all">
+      <p id="dateDisplay2"></p>
+      <img id="favorite_image"> </img>
+      <div class="info-box">
+        <div class="happiness-box">
+          <p id="info-prompts"></p>Happy Memory of the Day</p> </br>
+        
+          <p id="my_happiness"></p></br> 
+        </div>
+        <div class="quote-box"><br>
+          <p id="info-prompts">Favorite Quote of the Day</p>  </br>
+  
+          <p id="favorite_quote"> </p>
+        </div>
+        <button id="editButton">Edit Today's Memory</button>
       </div>
     </div>
-    <button id="editButton">Edit Today's Memory</button>
+     
+    <img id="bg_2" src="art/bg_2.jpg"></img>
   </div>
 
 </body>
