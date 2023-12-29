@@ -1,6 +1,6 @@
 {
-    "name": "Happy Growth",
-    "description": "Choose a quote, photo, and happiness moment of the day",
+    "name": "Happy Moment",
+    "description": "Choose a quote, photo, and happiness moment of the day.",
     "version": "1.0",
     "icons": {
         "16": "art/icon_16.png",
