@@ -10,7 +10,7 @@ $(document).ready(function() {
         generateEntries(happyMoment, quoteOfTheDay, imgData);
         updateDate();
       } else {
-        $('#calendar').fadeIn(0);
+        $('#today').fadeIn(0);
         updateDate();
       }
     });
@@ -29,13 +29,13 @@ $(document).ready(function() {
   });
 
   function goToPick() {
-    $('#calendar').hide();
+    $('#today').hide();
     $('#pick').fadeIn(800);
   }
 
   function goToRandomQuote() {
     $('#pick').hide();
-    $('#calendar').fadeIn(800);
+    $('#today').fadeIn(800);
   }
 
   function generateDate() {
