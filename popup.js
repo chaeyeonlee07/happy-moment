@@ -1,5 +1,19 @@
 $(document).ready(function() {
-  let selectedDate; // Declare selectedDate in a wider scope
+  let selectedDate;
+
+  function checkSavedData() {
+    const today = generateDate();
+    chrome.storage.local.get(today, function(result) {
+      if (result[today]) {
+        goToRandomQuote();
+        const [happyMoment, quoteOfTheDay, imgData] = result[today];
+        generateEntries(happyMoment, quoteOfTheDay, imgData);
+      } else {
+        goToPick();
+      }
+    });
+  }
+  checkSavedData();
 
   $("#saveButton").on("click", function() {
     goToRandomQuote();
@@ -13,36 +27,28 @@ $(document).ready(function() {
   function goToPick() {
     $('#calendar').hide();
     $('#pick').fadeIn(800);
-    generateRandomEntries();
   }
 
   function goToRandomQuote() {
     $('#pick').hide();
     $('#calendar').fadeIn(800);
-    generateRandomEntries(); 
   }
 
-  function getDate() {
-    const today = new Date();
-    const month = today.getMonth();
-    const day = today.getDate();
-    const year = today.getFullYear();
-    selectedDate = {
-      "month": month,
-      "day": day,
-      "year": year
-    };
-    return selectedDate;
+  function generateDate() {
+    const d = new Date();
+    const dMonth = d.getMonth() + 1; // Adding 1 because getMonth() returns a zero-based month index
+    const dDay = d.getDate();
+    const dYear = d.getFullYear();
+    const dTail = `${dMonth}/${dDay}/${dYear}`;
+    return dTail;
   }
 
-  function generateRandomEntries() {
-    chrome.storage.local.get(null, function (result) {
-      const entryCount = Object.keys(result).length;
-      console.log('Number of entries in local storage:', entryCount);
-    }); 
+  function generateEntries(happyMoment, quoteOfTheDay, imgData) {
+    $('#my_happiness').text(happyMoment); 
+    $('#favorite_quote').text(quoteOfTheDay);
+    $('#favorite_image').attr('src', imgData); 
   }
 
-  // Function to convert image to Base64
   function getBase64Image(file, callback) {
     const reader = new FileReader();
     reader.onload = function(event) {
@@ -52,22 +58,16 @@ $(document).ready(function() {
   }
 
   function saveData() {
-    const happyMoment = document.getElementById('happyInput').value;
-    const quoteOfTheDay = document.getElementById('quoteInput').value;
-
+    const happyMoment = $('#happyInput').val();
+    const quoteOfTheDay = $('#quoteInput').val();
     const bannerImage = document.getElementById('photoInput').files[0];
-    getBase64Image(bannerImage, function(imgData) {
-      const today = getDate();
-      const dataToSave = {
-        "happyMoment": happyMoment,
-        "quoteOfTheDay": quoteOfTheDay,
-        "uploadedPhoto": imgData
-      };
 
-      console.log(dataToSave);
-      chrome.storage.local.set({ [today]: dataToSave });
+    getBase64Image(bannerImage, function(imgData) {
+      const today = generateDate();
+      const dataToSave = [happyMoment, quoteOfTheDay, imgData];
+      chrome.storage.local.set({ [today]: dataToSave }, function() {
+        generateEntries(happyMoment, quoteOfTheDay, imgData);
+      });
     });
   }
 });
-
- 
