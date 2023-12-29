@@ -3,10 +3,10 @@
     "description": "Choose a quote, photo, and happiness moment of the day",
     "version": "1.0",
     "icons": {
-        "16": "art/beuni_16.png",
-        "32": "art/beuni_32.png",
-        "48": "art/beuni_48.png",
-        "128": "art/beuni_128.png"
+        "16": "art/icon_16.png",
+        "32": "art/icon_32.png",
+        "48": "art/icon_48.png",
+        "128": "art/icon_128.png"
     },
     "content_scripts": [
         {
